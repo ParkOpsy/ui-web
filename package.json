@@ -1,0 +1,19 @@
+{
+  "name": "ui-web",
+  "version": "0.0.1",
+  "description": "UI for administration and usage of ParkOps system",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ParkOpsy/ui-web.git"
+  },
+  "author": "Greg Nitsenko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ParkOpsy/ui-web/issues"
+  },
+  "homepage": "https://github.com/ParkOpsy/ui-web#readme"
+}
