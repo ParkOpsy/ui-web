@@ -1,4 +1,7 @@
-export const queue = (state, action) => {
+const queue = (state, action) => {
 
 };
 
+export default combineReducers({
+    queue
+});

@@ -1,5 +1,11 @@
-import * from './users';
-import * from './places';
-import * from './queue';
+import { combineReducers } from 'redux';
 
-export * from './index';
+import users from './users';
+import places from './places';
+import queue from './queue';
+
+export default combineReducers({
+    users,
+    places,
+    queue
+})

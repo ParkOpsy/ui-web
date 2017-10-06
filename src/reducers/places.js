@@ -1,4 +1,7 @@
-export const places = (state, action) => {
-
+const places = (state, action) => {
+    console.log('hello');
 };
 
+export default combineReducers({
+    places
+});

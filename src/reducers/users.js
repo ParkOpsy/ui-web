@@ -1,4 +1,7 @@
-export const users = (state, action) => {
+const users = (state, action) => {
 
 };
 
+export default combineReducers({
+    users
+});
