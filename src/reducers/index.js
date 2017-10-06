@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
 import users from './users';
+import conf from './conf';
 import places from './places';
-import queue from './queue';
+import notifications from './notifications';
 
 export default combineReducers({
     users,
     places,
-    queue
-})
+    notifications,
+	conf
+});
