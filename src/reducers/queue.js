@@ -1,9 +1,6 @@
-import { combineReducers } from 'redux';
 
-const queue = (state, action) => {
+const renters = (state, action) => {
 
 };
 
-export default combineReducers({
-    queue
-});
+export default renters;

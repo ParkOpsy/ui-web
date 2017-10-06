@@ -1,9 +1,19 @@
 import { combineReducers } from 'redux';
 
-const users = (state, action) => {
+const admins = (state, action) => {
+
+};
+
+const hosts = (state, action) => {
+
+};
+
+const drivers = (state, action) => {
 
 };
 
 export default combineReducers({
-    users
+	admins,
+	hosts,
+	drivers
 });
