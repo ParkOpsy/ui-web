@@ -1,5 +1,5 @@
 
-const places = (state, action) => {
+const places = (state = [], action) => {
 
 };
 

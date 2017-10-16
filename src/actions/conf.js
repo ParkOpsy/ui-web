@@ -1,6 +1,3 @@
-import types from '../consts/types';
+import { createAction } from './utils';
 
-export const setConf = data => ({
-	type: types.CONF_SET,
-	data: {...data}
-});
+export const setConf = conf => createAction('SET_CONF', conf);

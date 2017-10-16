@@ -1,59 +1,37 @@
-import types from '../consts/types';
-import { status } from '../consts/place';
+import { createAction, createRequestTypes, FAILURE, SUCCESS, REQUEST } from './utils';
 
-export const addPlace = place => ({
-	type: types.PLACE_CREATED,
-	data: {...place}
-});
+const CREATE_PLACE = createRequestTypes('CREATE_PLACE');
+const UPDATE_PLACE = createRequestTypes('UPDATE_PLACE');
+const REMOVE_PLACE = createRequestTypes('REMOVE_PLACE');
+const BOOK_PLACE = createRequestTypes('BOOK_PLACE');
+const FREE_PLACE = createRequestTypes('FREE_PLACE');
 
-export const removePlace = id => dispatch => {
-    dispatch(processingPlace(id));
-    return {
-        type: types.PLACE_DELETED,
-        data: {id}
-    };
+export const createPlace = {
+	request: place => createAction(CREATE_PLACE[REQUEST], place),
+	success: (place, response) => createAction(CREATE_PLACE[SUCCESS], {place, response}),
+	failure: (place, error) => createAction(CREATE_PLACE[FAILURE], {place, error})
 };
 
-export const updatePlace = (id, placeUpdate) => dispatch => {
-    dispatch(processingPlace(id));
-    return {
-        type: types.PLACE_UPDATED,
-        data: {id, ...placeUpdate}
-    }
+export const updatePlace = {
+	request: place => createAction(UPDATE_PLACE[REQUEST], place),
+	success: (place, response) => createAction(UPDATE_PLACE[SUCCESS], {place, response}),
+	failure: (place, error) => createAction(UPDATE_PLACE[FAILURE], {place, error})
 };
 
-export const requestPlaceBooking = id => dispatch => {
-    dispatch(changePlaceStatus(id, status.PENDING));
-    return {
-        type: types.PLACE_REQUEST_BOOKING,
-        data: {id}
-    }
+export const removePlace = {
+	request: id => createAction(REMOVE_PLACE[REQUEST], id),
+	success: (id, response) => createAction(REMOVE_PLACE[SUCCESS], {id, response}),
+	failure: (id, error) => createAction(REMOVE_PLACE[FAILURE], {id, error})
 };
 
-export const confirmPlaceBooking = id => dispatch => {
-    dispatch(changePlaceStatus(id, status.BUSY));
-    return {
-        type: types.PLACE_CONFIRM_BOOKING,
-        data: {id}
-    }
+export const bookPlace = {
+	request: id => createAction(BOOK_PLACE[REQUEST], id),
+	success: (id, response) => createAction(BOOK_PLACE[SUCCESS], {id, response}),
+	failure: (id, error) => createAction(BOOK_PLACE[FAILURE], {id, error})
 };
 
-export const rejectPlaceBooking = id => dispatch => {
-    dispatch(changePlaceStatus(id, status.FREE));
-    return {
-        type: types.PLACE_REJECT_BOOKING,
-        data: {id}
-    }
+export const freePlace = {
+	request: id => createAction(FREE_PLACE[REQUEST], id),
+	success: (id, response) => createAction(FREE_PLACE[SUCCESS], {id, response}),
+	failure: (id, error) => createAction(FREE_PLACE[FAILURE], {id, error})
 };
-
-export const changePlaceStatus = (id, status) => ({
-	type: types.PLACE_CHANGE_STATUS,
-	data: {id, status}
-});
-
-export const processingPlace = id => ({
-    type: types.PLACE_PROCESSING,
-    data: {id}
-});
-
-

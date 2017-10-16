@@ -1,5 +1,9 @@
 
-export const conf = (state, action) => {
+const initialConf = {
+
+};
+
+export const conf = (state = initialConf, action) => {
 
 };
 

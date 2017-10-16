@@ -1,82 +1,23 @@
-import types from '../consts/types';
+import { createAction, createRequestTypes, FAILURE, SUCCESS, REQUEST } from './utils';
 
-export const createAdmin = admin => ({
-	type: types.USER_ADMIN_CREATE,
-	data: {...admin}
-});
+const CREATE_USER = createRequestTypes('CREATE_USER');
+const UPDATE_USER = createRequestTypes('UPDATE_USER');
+const REMOVE_USER = createRequestTypes('REMOVE_USER');
 
-export const processingUser = id => ({
-   type: types.USER_PROCESSING,
-   data: {id}
-});
-
-export const addingVacations = id => ({
-    type: types.USER_HOST_ADDING_VACATIONS,
-    data: {id}
-});
-
-export const removeAdmin = id => dispatch => {
-    dispatch(processingUser(id));
-    return {
-        type: types.USER_ADMIN_DELETE,
-        data: {id}
-    };
+export const createUser = {
+	request: user => createAction(CREATE_USER[REQUEST], user),
+	success: (user, response) => createAction(CREATE_USER[SUCCESS], {user, response}),
+	failure: (user, error) => createAction(CREATE_USER[FAILURE], {user, error})
 };
 
-export const updateAdmin = (id, adminUpdate) => dispatch => {
-    dispatch(processingUser(id));
-    return {
-        type: types.USER_ADMIN_UPDATE,
-        data: {id, ...adminUpdate}
-    };
+export const updateUser = {
+	request: user => createAction(UPDATE_USER[REQUEST], user),
+	success: (user, response) => createAction(UPDATE_USER[SUCCESS], {user, response}),
+	failure: (user, error) => createAction(UPDATE_USER[FAILURE], {user, error})
 };
 
-export const createHost = host => ({
-	type: types.USER_HOST_CREATE,
-	data: {...host}
-});
-
-export const removeHost = id => dispatch => {
-    dispatch(processingUser(id));
-    return {
-        type: types.USER_HOST_DELETE,
-        data: {id}
-    };
-};
-
-export const updateHost = (id, hostUpdate) => dispatch => {
-    dispatch(processingUser(id));
-    return {
-        type: types.USER_HOST_UPDATE,
-        data: {id, ...hostUpdate}
-    };
-};
-
-export const addVacations = (hostID, dates) => dispatch => {
-    dispatch(addingVacations(hostID));
-    return {
-        type: types.USER_HOST_ADD_VACATIONS,
-        data: {hostID, dates}
-    }
-};
-
-export const createDriver = driver => ({
-	type: types.USER_DRIVER_CREATE,
-	data: {...driver}
-});
-
-export const removeDriver = id => dispatch => {
-    dispatch(processingUser(id));
-    return {
-        type: types.USER_DRIVER_DELETE,
-        data: {id}
-    };
-};
-
-export const updateDriver = (id, driverUpdate) => dispatch => {
-    dispatch(processingUser(id));
-    return {
-        type: types.USER_ADMIN_UPDATE,
-        data: {id, ...driverUpdate}
-    };
+export const removeUser = {
+	request: id => createAction(REMOVE_USER[REQUEST], id),
+	success: (id, response) => createAction(REMOVE_USER[SUCCESS], {id, response}),
+	failure: (id, error) => createAction(REMOVE_USER[FAILURE], {id, error})
 };
