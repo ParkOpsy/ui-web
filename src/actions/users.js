@@ -1,23 +1,11 @@
-import { createAction, createRequestTypes, FAILURE, SUCCESS, REQUEST } from './utils';
+import { createAction } from './utils';
 
-const CREATE_USER = createRequestTypes('CREATE_USER');
-const UPDATE_USER = createRequestTypes('UPDATE_USER');
-const REMOVE_USER = createRequestTypes('REMOVE_USER');
+export const getUsers = () => createAction('REQUEST_GET_USERS');
 
-export const createUser = {
-	request: user => createAction(CREATE_USER[REQUEST], user),
-	success: (user, response) => createAction(CREATE_USER[SUCCESS], {user, response}),
-	failure: (user, error) => createAction(CREATE_USER[FAILURE], {user, error})
-};
+export const getUser = id => createAction('REQUEST_GET_USER', { id  });
 
-export const updateUser = {
-	request: user => createAction(UPDATE_USER[REQUEST], user),
-	success: (user, response) => createAction(UPDATE_USER[SUCCESS], {user, response}),
-	failure: (user, error) => createAction(UPDATE_USER[FAILURE], {user, error})
-};
+export const createUser = user => createAction('REQUEST_CREATE_USER', { user });
 
-export const removeUser = {
-	request: id => createAction(REMOVE_USER[REQUEST], id),
-	success: (id, response) => createAction(REMOVE_USER[SUCCESS], {id, response}),
-	failure: (id, error) => createAction(REMOVE_USER[FAILURE], {id, error})
-};
+export const updateUser = (id, update) => createAction('REQUEST_UPDATE_USER', { id, update });
+
+export const removeUser = id => createAction('REQUEST_REMOVE_USER', { id });
