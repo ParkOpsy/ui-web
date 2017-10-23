@@ -24,8 +24,8 @@ export function* getUser(action) {
 
 export function* createUser(action) {
 	try {
-		const id = yield call(Api.createUser, action.data.user);
-		yield put(createAction('SUCCESS_CREATE_USER', id));
+		const newUser = yield call(Api.createUser, action.data.user);
+		yield put(createAction('SUCCESS_CREATE_USER', newUser));
 	}
 	catch (error) {
 		yield put(createAction('FAILURE_CREATE_USER', error));

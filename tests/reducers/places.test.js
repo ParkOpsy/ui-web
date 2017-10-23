@@ -226,7 +226,13 @@ describe('place reducer', () => {
 
 			test('should handle SUCCESS_CREATE_PLACE action', () => {
 				expect(
-					reducer(initialState, createAction('SUCCESS_CREATE_PLACE', '123asdl-uiou123-asdm1-789'))
+					reducer(initialState, createAction('SUCCESS_CREATE_PLACE', {
+						id: '123asdl-uiou123-asdm1-789',
+						name: '54',
+						description: 'Description of a new place',
+						ownerId: 'sdfa-asdfa123-asdfs111-89',
+						hostId: 'sdfa-asdfa123-asdfs111-89'
+					}))
 				).toEqual({
 					isFetching: false,
 					fetchingItems: [],
@@ -301,7 +307,13 @@ describe('place reducer', () => {
 
 			test('should handle SUCCESS_CREATE_PLACE action', () => {
 				const nextState = reducer(randomState,
-					createAction('SUCCESS_CREATE_PLACE', '123asdl-uiou123-asdm1-789'));
+					createAction('SUCCESS_CREATE_PLACE', {
+						id: '123asdl-uiou123-asdm1-789',
+						name: '91',
+						description: 'Description of a new place',
+						ownerId: 'mbnzxc-czxb8-pohfd99-33',
+						hostId: 'mbnzxc-czxb8-pohfd99-33'
+					}));
 
 				expect(nextState).toEqual({
 					isFetching: false,

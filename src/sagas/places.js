@@ -24,8 +24,8 @@ export function* getPlace(action) {
 
 export function* createPlace(action) {
 	try {
-		const id = yield call(Api.createPlace, action.data.place);
-		yield put(createAction('SUCCESS_CREATE_PLACE', id));
+		const newPlace = yield call(Api.createPlace, action.data.place);
+		yield put(createAction('SUCCESS_CREATE_PLACE', newPlace));
 	}
 	catch (error) {
 		yield put(createAction('FAILURE_CREATE_PLACE', error));

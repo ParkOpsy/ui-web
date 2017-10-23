@@ -205,16 +205,59 @@ describe('users reducer', () => {
 
 		describe('from the initial state', () => {
 
-			test('should handle REQUEST_CREATE_USER action', () => {
+			const initialState = {
+				isFetching: false,
+				fetchingItems: [],
+				lastFetchError: null,
+				users: []
+			};
 
+			const newUser = {
+				name: 'Ivan Vasiliev'
+			};
+
+			test('should handle REQUEST_CREATE_USER action', () => {
+				const nextState = reducer(
+					initialState,
+					createAction('REQUEST_CREATE_USER', newUser)
+				);
+
+				expect(nextState).toEqual({
+					isFetching: true,
+					fetchingItems: [],
+					lastFetchError: null,
+					users: []
+				});
 			});
 
 			test('should handle SUCCESS_CREATE_USER action', () => {
+				const nextState = reducer(
+					initialState,
+					createAction('SUCCESS_CREATE_USER', { id: 'newuser', name: 'Ivan Vasiliev' })
+				);
 
+				expect(nextState).toEqual({
+					isFetching: false,
+					fetchingItems: [],
+					lastFetchError: null,
+					users: [{ id: 'newuser', name: 'Ivan Vasiliev' }]
+				});
 			});
 
 			test('should handle FAILURE_CREATE_USER action', () => {
+				const nextState = reducer(
+					initialState,
+					createAction('FAILURE_CREATE_USER', { message: 'error creating user' })
+				);
 
+				expect(nextState).toEqual({
+					isFetching: false,
+					fetchingItems: [],
+					lastFetchError: {
+						message: 'error creating user'
+					},
+					users: []
+				});
 			});
 		});
 
@@ -260,7 +303,10 @@ describe('users reducer', () => {
 			test('should handle SUCCESS_CREATE_USER action', () => {
 				const nextState = reducer(
 					randomState,
-					createAction('SUCCESS_CREATE_USER', 'user3')
+					createAction('SUCCESS_CREATE_USER', {
+						id: 'user3',
+						name: 'Ivan Vasiliev'
+					})
 				);
 
 				expect(
@@ -277,7 +323,21 @@ describe('users reducer', () => {
 			});
 
 			test('should handle FAILURE_CREATE_USER action', () => {
+				const nextState = reducer(
+					randomState,
+					createAction('FAILURE_CREATE_USER', { message: 'error creating user' })
+				);
 
+				expect(
+					nextState
+				).toEqual({
+					isFetching: false,
+					fetchingItems: [],
+					lastFetchError: {
+						message: 'error creating user'
+					},
+					users: [user1, user2]
+				})
 			});
 		});
 
