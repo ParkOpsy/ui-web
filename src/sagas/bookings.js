@@ -4,7 +4,7 @@ import {call, put} from 'redux-saga/effects';
 
 export function* createBooking(action) {
 	try {
-		const booking = yield call(Api.createBooking, action.data.placeId);
+		const booking = yield call(Api.createBooking, action.data.placeId, action.data.hostId);
 		yield put(createAction('SUCCESS_BOOK_PLACE', booking));
 	}
 	catch (error) {

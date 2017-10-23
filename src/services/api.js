@@ -16,5 +16,5 @@ export const getPlace = id => fetch(`${base}/places/${id}`, { method: 'GET' });
 export const updatePlace = (id, update) => fetch(`${base}/places/${id}`, { method: 'PUT', body: update });
 export const removePlace = id => fetch(`${base}/places/${id}`, { method: 'DELETE' });
 
-export const createBooking = placeId => fetch(`${base}/bookings/${placeId}`, { method: 'POST' });
+export const createBooking = (placeId, hostId) => fetch(`${base}/bookings/${placeId}`, { method: 'POST', body: { hostId } });
 export const cancelBooking = placeId => fetch(`${base}/bookings/${placeId}`, { method: 'DELETE' });
