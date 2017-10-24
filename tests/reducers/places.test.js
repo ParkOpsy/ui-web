@@ -44,7 +44,12 @@ describe('place reducer', () => {
 				};
 
 				expect(
-					reducer(initialState, createAction('SUCCESS_GET_PLACES', [{ id: 'id'}]))
+					reducer({
+						isFetching: true,
+						fetchingItems: [],
+						lastFetchError: null,
+						places: []
+					}, createAction('SUCCESS_GET_PLACES', [{ id: 'id'}]))
 				).toEqual(pattern);
 			});
 
@@ -59,7 +64,12 @@ describe('place reducer', () => {
 				};
 
 				expect(
-					reducer(initialState, createAction('FAILURE_GET_PLACES', { message: 'error fetching places'}))
+					reducer({
+						isFetching: true,
+						fetchingItems: [],
+						lastFetchError: null,
+						places: []
+					}, createAction('FAILURE_GET_PLACES', { message: 'error fetching places'}))
 				).toEqual(pattern);
 			});
 		});
@@ -95,7 +105,12 @@ describe('place reducer', () => {
 				};
 
 				expect(
-					reducer(randomState, createAction('SUCCESS_GET_PLACES', [{ id: 'id3'}]))
+					reducer({
+						isFetching: true,
+						fetchingItems: ['id1', 'id2'],
+						lastFetchError: null,
+						places: [{ id: 'id1'}, { id: 'id2' }]
+					}, createAction('SUCCESS_GET_PLACES', [{ id: 'id3'}]))
 				).toEqual(pattern);
 			});
 
@@ -110,7 +125,12 @@ describe('place reducer', () => {
 				};
 
 				expect(
-					reducer(randomState, createAction('FAILURE_GET_PLACES', { message: 'error fetching places'}))
+					reducer({
+						isFetching: true,
+						fetchingItems: ['id1', 'id2'],
+						lastFetchError: null,
+						places: [{ id: 'id1'}, { id: 'id2' }]
+					}, createAction('FAILURE_GET_PLACES', { message: 'error fetching places'}))
 				).toEqual(pattern);
 			});
 		});
@@ -163,8 +183,13 @@ describe('place reducer', () => {
 				hostId: 'lkj123-kla8123i-uiao11-321'
 			};
 
-			const nextState = reducer(randomState,
-									  createAction('SUCCESS_GET_PLACE', updatedSecondPlace));
+			const nextState = reducer({
+					isFetching: true,
+					fetchingItems: ['129lkj-dsad2123-asd123-55'],
+					lastFetchError: null,
+					places: [firstPlace, secondPlace]
+				},
+				createAction('SUCCESS_GET_PLACE', updatedSecondPlace));
 
 			expect(nextState).toEqual({
 				isFetching: false,
@@ -177,7 +202,12 @@ describe('place reducer', () => {
 		});
 
 		test('should handle FAILURE_GET_PLACE action', () => {
-			const nextState = reducer(randomState,
+			const nextState = reducer({
+					isFetching: true,
+					fetchingItems: ['129lkj-dsad2123-asd123-55'],
+					lastFetchError: null,
+					places: [firstPlace, secondPlace]
+				},
 				createAction('FAILURE_GET_PLACE', { message: 'error getting place', id: '129lkj-dsad2123-asd123-55' }));
 
 			expect(nextState).toEqual({
@@ -226,7 +256,12 @@ describe('place reducer', () => {
 
 			test('should handle SUCCESS_CREATE_PLACE action', () => {
 				expect(
-					reducer(initialState, createAction('SUCCESS_CREATE_PLACE', {
+					reducer({
+						isFetching: true,
+						fetchingItems: [],
+						lastFetchError: null,
+						places: []
+					}, createAction('SUCCESS_CREATE_PLACE', {
 						id: '123asdl-uiou123-asdm1-789',
 						name: '54',
 						description: 'Description of a new place',
@@ -249,7 +284,12 @@ describe('place reducer', () => {
 
 			test('should handle FAILURE_CREATE_PLACE action', () => {
 				expect(
-					reducer(initialState, createAction('FAILURE_CREATE_PLACE', { message: 'error creating place'}))
+					reducer({
+						isFetching: true,
+						fetchingItems: [],
+						lastFetchError: null,
+						places: []
+					}, createAction('FAILURE_CREATE_PLACE', { message: 'error creating place'}))
 				).toEqual({
 					isFetching: false,
 					fetchingItems: [],
@@ -306,7 +346,12 @@ describe('place reducer', () => {
 			});
 
 			test('should handle SUCCESS_CREATE_PLACE action', () => {
-				const nextState = reducer(randomState,
+				const nextState = reducer({
+						isFetching: true,
+						fetchingItems: [],
+						lastFetchError: null,
+						places: [firstPlace, secondPlace]
+					},
 					createAction('SUCCESS_CREATE_PLACE', {
 						id: '123asdl-uiou123-asdm1-789',
 						name: '91',
@@ -333,7 +378,12 @@ describe('place reducer', () => {
 			});
 
 			test('should handle FAILURE_CREATE_PLACE action', () => {
-				const nextState = reducer(randomState, createAction('FAILURE_CREATE_PLACE', { message: 'error creating place' }));
+				const nextState = reducer({
+					isFetching: true,
+					fetchingItems: [],
+					lastFetchError: null,
+					places: [firstPlace, secondPlace]
+				}, createAction('FAILURE_CREATE_PLACE', { message: 'error creating place' }));
 
 				expect(nextState).toEqual({
 					isFetching: false,
@@ -398,7 +448,12 @@ describe('place reducer', () => {
 				hostId: 'lkj123-kla8123i-uiao11-321'
 			};
 
-			const nextState = reducer(randomState,
+			const nextState = reducer({
+					isFetching: true,
+					fetchingItems: ['129lkj-dsad2123-asd123-55'],
+					lastFetchError: null,
+					places: [firstPlace, secondPlace]
+				},
 				createAction('SUCCESS_UPDATE_PLACE', updatedSecondPlace));
 
 			expect(nextState).toEqual({
@@ -412,7 +467,12 @@ describe('place reducer', () => {
 		});
 
 		test('should handle FAILURE_UPDATE_PLACE action', () => {
-			const nextState = reducer(randomState, createAction('FAILURE_UPDATE_PLACE',
+			const nextState = reducer({
+				isFetching: true,
+				fetchingItems: ['129lkj-dsad2123-asd123-55'],
+				lastFetchError: null,
+				places: [firstPlace, secondPlace]
+			}, createAction('FAILURE_UPDATE_PLACE',
 				{ message: 'error updating place',
 				  id: '129lkj-dsad2123-asd123-55'}));
 
@@ -471,7 +531,12 @@ describe('place reducer', () => {
 		});
 
 		test('should handle SUCCESS_REMOVE_PLACE action', () => {
-			const nextState = reducer(randomState,
+			const nextState = reducer({
+					isFetching: true,
+					fetchingItems: ['129lkj-dsad2123-asd123-55'],
+					lastFetchError: null,
+					places: [firstPlace, secondPlace]
+				},
 				createAction('SUCCESS_REMOVE_PLACE', { id: '129lkj-dsad2123-asd123-55' }));
 
 			expect(nextState).toEqual({
@@ -485,7 +550,12 @@ describe('place reducer', () => {
 		});
 
 		test('should handle FAILURE_REMOVE_PLACE action', () => {
-			const nextState = reducer(randomState,
+			const nextState = reducer({
+					isFetching: true,
+					fetchingItems: ['129lkj-dsad2123-asd123-55'],
+					lastFetchError: null,
+					places: [firstPlace, secondPlace]
+				},
 				createAction('FAILURE_REMOVE_PLACE', { message: 'error removing place', id: '129lkj-dsad2123-asd123-55'}));
 
 			expect(nextState).toEqual({
@@ -547,7 +617,12 @@ describe('place reducer', () => {
 		test('should handle SUCCESS_BOOK_PLACE action', () => {
 			const nextState =
 				reducer(
-					randomState, createAction('SUCCESS_BOOK_PLACE', {
+					{
+						isFetching: true,
+						fetchingItems: ['129lkj-dsad2123-asd123-55'],
+						lastFetchError: null,
+						places: [firstPlace, secondPlace]
+					}, createAction('SUCCESS_BOOK_PLACE', {
 						placeId: '129lkj-dsad2123-asd123-55',
 						hostId: 'kasd123-asdk123-ppo-75'
 					})
@@ -570,7 +645,12 @@ describe('place reducer', () => {
 		test('should handle FAILURE_BOOK_PLACE action', () => {
 			const nextState =
 				reducer(
-					randomState, createAction('FAILURE_BOOK_PLACE', {
+					{
+						isFetching: true,
+						fetchingItems: ['129lkj-dsad2123-asd123-55'],
+						lastFetchError: null,
+						places: [firstPlace, secondPlace]
+					}, createAction('FAILURE_BOOK_PLACE', {
 						message: 'error booking place',
 						placeId: '129lkj-dsad2123-asd123-55'
 					})
@@ -632,7 +712,13 @@ describe('place reducer', () => {
 		test('should handle SUCCESS_CANCEL_BOOKING action', () => {
 			const nextState =
 				reducer(
-					randomState, createAction('SUCCESS_CANCEL_BOOKING', {
+					{
+						isFetching: true,
+						fetchingItems: ['kui231-edda23-eds22-33'],
+						lastFetchError: null,
+						places: [firstPlace, secondPlace]
+					},
+					createAction('SUCCESS_CANCEL_BOOKING', {
 						placeId: 'kui231-edda23-eds22-33'
 					})
 				);
@@ -654,7 +740,13 @@ describe('place reducer', () => {
 		test('should handle FAILURE_CANCEL_BOOKING action', () => {
 			const nextState =
 				reducer(
-					randomState, createAction('FAILURE_CANCEL_BOOKING', {
+					{
+						isFetching: true,
+						fetchingItems: ['kui231-edda23-eds22-33'],
+						lastFetchError: null,
+						places: [firstPlace, secondPlace]
+					},
+					createAction('FAILURE_CANCEL_BOOKING', {
 						message: 'error cancel booking',
 						placeId: 'kui231-edda23-eds22-33'
 					})
