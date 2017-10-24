@@ -1,5 +1,5 @@
 
-const users = (state = [], action) => {
+const users = (state = {}, action) => {
 
 };
 
