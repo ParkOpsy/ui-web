@@ -34,8 +34,8 @@ export function* createPlace(action) {
 
 export function* updatePlace(action) {
 	try {
-		const response = yield call(Api.updatePlace, action.data.id, action.data.update);
-		yield put(createAction('SUCCESS_UPDATE_PLACE', response));
+		const updatedPlace = yield call(Api.updatePlace, action.data.id, action.data.update);
+		yield put(createAction('SUCCESS_UPDATE_PLACE', updatedPlace));
 	}
 	catch (error) {
 		yield put(createAction('FAILURE_UPDATE_PLACE', error));
@@ -44,8 +44,8 @@ export function* updatePlace(action) {
 
 export function* removePlace(action) {
 	try {
-		const response = yield call(Api.removePlace, action.data.id);
-		yield put(createAction('SUCCESS_REMOVE_PLACE', response));
+		const id = yield call(Api.removePlace, action.data.id);
+		yield put(createAction('SUCCESS_REMOVE_PLACE', { id }));
 	}
 	catch (error) {
 		yield put(createAction('FAILURE_REMOVE_PLACE', error));

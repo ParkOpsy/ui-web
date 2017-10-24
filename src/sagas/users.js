@@ -34,8 +34,8 @@ export function* createUser(action) {
 
 export function* updateUser(action) {
 	try {
-		const response = yield call(Api.updateUser, action.data.id, action.data.update);
-		yield put(createAction('SUCCESS_UPDATE_USER', response));
+		const updatedUser = yield call(Api.updateUser, action.data.id, action.data.update);
+		yield put(createAction('SUCCESS_UPDATE_USER', updatedUser));
 	}
 	catch (error) {
 		yield put(createAction('FAILURE_UPDATE_USER', error));
@@ -44,8 +44,8 @@ export function* updateUser(action) {
 
 export function* removeUser(action) {
 	try {
-		const response = yield call(Api.removeUser, action.data.id);
-		yield put(createAction('SUCCESS_REMOVE_USER', response));
+		const id = yield call(Api.removeUser, action.data.id);
+		yield put(createAction('SUCCESS_REMOVE_USER', { id }));
 	}
 	catch (error) {
 		yield put(createAction('FAILURE_REMOVE_USER', error));
